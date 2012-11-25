@@ -1,0 +1,79 @@
+require File.join(File.dirname(__FILE__),'dice_nodes.rb')
+
+grammar DiceString
+  
+  rule expression
+    additive
+  end
+  
+  rule additive
+    head:multitive 
+    tail:(space operator:additive_op space operand:multitive)* <BinopNode>
+  end
+     
+  rule multitive
+    head:primary 
+    tail:(space operator:multitive_op space operand:primary)* <BinopNode>
+  end
+  
+  rule additive_op
+    '+' {
+      def apply(a,b)
+        a + b
+      end
+    } / '-' {
+      def apply(a,b)
+        a - b
+      end
+    }
+  end
+  
+  rule multitive_op
+    '*' {
+      def apply(a,b)
+        a * b
+      end
+    } / '/'  {
+      def apply(a,b)
+        a / b
+      end
+      }
+  end
+ 
+  rule primary
+    dice / number / '(' space expression space ')' {
+      def evaluate
+        expression.evaluate
+      end
+    }
+  end
+  
+  rule number
+    integer ('.' integer)? {
+      def evaluate
+        text_value.to_f
+      end
+    }
+     
+  end 
+  
+  rule integer
+    ([1-9] [0-9]* / '0') {
+      def evaluate
+        text_value.to_i
+      end
+    }
+  end
+  
+  rule space
+    ' '*
+  end
+  
+  rule dice
+    num_dice:integer? 'd' sides:(integer / '%') keep:keep? <DiceNode> 
+  end
+  
+  rule keep
+    op:('h' / 'l') n:integer <KeepNode>
+  end
+end
