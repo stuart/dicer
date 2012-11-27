@@ -20,12 +20,12 @@ Or install it yourself as:
 
 The supported dice notation:
 
-NdX - Roll N dice with X sides and add the result. e.g. 3d6, 4d10, 1d100.
-dX  - Roll one die with X sides.
-d%  - Roll one percentile (100 sided) die.
-hY  - Keep the highest Y rolls. e.g. 4d6h3 would give a roll in the range 3..18
-kY  - A synonym for h (keep).
-lZ  - Keep the lowest Z rolls. e.g. 2d6l1 would take the lowest of two dice.
+* NdX - Roll N dice with X sides and add the result. e.g. 3d6, 4d10, 1d100.
+* dX  - Roll one die with X sides.
+* d%  - Roll one percentile (100 sided) die.
+* hY  - Keep the highest Y rolls. e.g. 4d6h3 would give a roll in the range 3..18
+* kY  - A synonym for h (keep).
+* lZ  - Keep the lowest Z rolls. e.g. 2d6l1 would take the lowest of two dice.
 
 Basic arithmetic is also supported:
 integers, floats, +, -, *, / and () are all allowed.
