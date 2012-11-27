@@ -24,7 +24,7 @@ module DiceString
   class KeepNode < Treetop::Runtime::SyntaxNode
     def evaluate rolls
       case op.text_value
-      when 'h'
+      when 'h', 'k'
         rolls.sort.reverse.take n.evaluate
       when 'l'
         rolls.sort.take n.evaluate

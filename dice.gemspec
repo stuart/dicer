@@ -14,5 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "dice"
   gem.require_paths = ["lib"]
   gem.version       = Dice::VERSION
-  gem.add_dependency
+  gem.requirements  << 'Treetop version 1.4 or later.'
+  gem.add_dependency "treetop"
 end
