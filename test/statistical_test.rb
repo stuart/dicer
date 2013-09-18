@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'treetop'
 require 'dice'
 
-class StatisticalTest < MiniTest::Unit::TestCase
+class StatisticalTest < MiniTest::Test
 
 
   def test_should_have_expected_maximum

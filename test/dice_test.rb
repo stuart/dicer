@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'treetop'
 require 'dice'
 
-class DiceParserTest < MiniTest::Unit::TestCase
+class DiceParserTest < MiniTest::Test
 
   def test_integer
     assert_equal 0, Dice.roll('0')
