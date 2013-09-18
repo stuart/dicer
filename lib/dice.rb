@@ -10,8 +10,8 @@ class Dice
     @@parser.parse string
   end
 
-  def self.rng n
-    @@rng ||= lambda{ Random.rand(n) + 1}
+  def self.rng
+    @@rng ||= lambda{ |n| Random.rand(n) + 1 }
   end
 
   def self.roll string
