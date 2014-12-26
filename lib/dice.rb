@@ -1,23 +1,24 @@
 require 'treetop'
 
-require File.join(File.expand_path(File.dirname(__FILE__)),'dice','dice_nodes.rb')
+require File.join(File.expand_path(File.dirname(__FILE__)), 'dice', 'dice_nodes.rb')
 
+# This class encapsulates the dice parser from treetop.
 class Dice
-  Treetop.load(File.join(File.expand_path(File.dirname(__FILE__)),'dice','dicestring'))
-  @@parser = DiceStringParser.new
+  Treetop.load(File.join(File.expand_path(File.dirname(__FILE__)), 'dice', 'dicestring'))
+  @parser = DiceStringParser.new
 
   attr_accessor :dice_string
 
   def self.parse string
-    @@parser.parse string
+    @parser.parse string
   end
 
   def self.rng= generator
-    @@rng = generator
+    @rng = generator
   end
 
   def self.rng
-    @@rng ||= lambda{ |n| Random.rand(n) + 1 }
+    @rng ||= -> (n) { Random.rand(n) + 1 }
   end
 
   def self.roll string
@@ -29,6 +30,20 @@ class Dice
   end
 
   def roll
-    self.class.parse(dice_string).evaluate
+    dice.evaluate
+  end
+
+  def maximum
+    dice.maximum
+  end
+
+  def minimum
+    dice.minimum
+  end
+
+  private
+
+  def dice
+    self.class.parse(dice_string)
   end
 end

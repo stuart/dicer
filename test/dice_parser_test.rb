@@ -32,7 +32,7 @@ class DiceParserTest < MiniTest::Test
   def test_parens
     assert_equal 7, Dice.roll('1+2*3')
     assert_equal 9, Dice.roll('(1+2)*3')
-    assert_equal -2, Dice.roll('5-(3+4)')
+    assert_equal(-2, Dice.roll('5-(3+4)'))
   end
 
   def test_dice
@@ -49,22 +49,19 @@ class DiceParserTest < MiniTest::Test
   end
 
   def test_keep_highest
-    rolls = [5,2,3]
-    Random.stub :rand, lambda{|n| rolls.shift} do
+    stub_random [5, 2, 3] do
       assert_equal 10, Dice.roll('3d6h2')
     end
   end
 
   def test_keep_lowest
-    rolls = [5,2,3]
-    Random.stub :rand, lambda{|n| rolls.shift} do
+    stub_random [5, 2, 3] do
       assert_equal 7, Dice.roll('3d6l2')
     end
   end
 
   def test_multiple_dice_sets
-    rolls = [4,8,1,3,2]
-    Random.stub :rand, lambda{|n| rolls.shift} do
+    stub_random [4, 8, 1, 3, 2] do
       assert_equal 23, Dice.roll('2d10+3d4')
     end
   end
@@ -81,9 +78,14 @@ class DiceParserTest < MiniTest::Test
   end
 
   def test_complex_case
-    rolls = [4,8,1,3,2,24]
-     Random.stub :rand, lambda{|n| rolls.shift} do
-       assert_equal 10*(5 + 9)*(2 + (2 + 4 + 3)) /(3 - 25)+3.5, Dice.roll('10*2d10*(2+3d4)/(3-d%)+3.5')
-     end
+    stub_random [4,8,1,3,2,24] do
+      assert_equal 10*(5 + 9)*(2 + (2 + 4 + 3)) /(3 - 25)+3.5, Dice.roll('10*2d10*(2+3d4)/(3-d%)+3.5')
+    end
+  end
+
+  def stub_random rolls
+    Random.stub :rand, -> (_) { rolls.shift } do
+      yield
+    end
   end
 end
