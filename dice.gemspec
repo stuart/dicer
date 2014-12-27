@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "dicer"
+  gem.name          = "dice_parser"
   gem.require_paths = ["lib"]
   gem.version       = Dice::VERSION
   gem.requirements  << 'Treetop version 1.4 or later.'
