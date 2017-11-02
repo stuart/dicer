@@ -1,3 +1,3 @@
-module Dice
+class Dice
   VERSION = "1.0.1"
 end

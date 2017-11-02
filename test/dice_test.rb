@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'treetop'
-require 'dice'
+require File.expand_path('../test_helper', __FILE__)
 
 class DiceTest < MiniTest::Test
   def test_new_assigns_the_dice_string
